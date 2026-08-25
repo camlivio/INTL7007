@@ -1,0 +1,549 @@
+---
+title: "R Basics & The Weighted Dice"
+output:
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+    theme: flatly
+runtime: shiny_prerendered
+description: "A first hour in R: arithmetic, objects, vectors, functions, and building a pair of loaded dice."
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+tutorial_options(exercise.timelimit = 30)
+set.seed(NULL)
+```
+
+## Welcome
+
+Today you are going to build a pair of dice in R --- and then quietly weight them
+so they roll 12 more often than they should.
+
+Along the way you will meet almost everything you need to start using R:
+
+- arithmetic and **objects**
+- **vectors** and element-wise math
+- **functions** and their **arguments**
+- writing a function of your own
+- repeating a simulation thousands of times
+
+**How this works.** Every grey box below is a live R console. Type into it and
+click **Run Code**. Nothing you do here can break anything --- if a box gets into
+a mess, click **Start Over** at the top of the section and try again.
+
+Boxes with a **Hint** button will nudge you; **Solution** shows the answer. Try
+it yourself before you peek.
+
+## 1. R is a calculator
+
+At its simplest, R evaluates what you type and prints the answer.
+
+Run this box as-is first:
+
+```{r calc1, exercise=TRUE}
+1 + 1
+```
+
+Now **change it**. In the box below, work out how many minutes are in a week.
+
+```{r calc2, exercise=TRUE}
+
+```
+
+```{r calc2-hint}
+# minutes in an hour, times hours in a day, times days in a week
+60 * 24
+```
+
+```{r calc2-solution}
+60 * 24 * 7
+```
+
+R has the operators you would expect: `+  -  *  /  ^`. It also has some you may
+not: `%%` gives the remainder after division.
+
+```{r calc3, exercise=TRUE}
+17 %% 5
+2^10
+```
+
+### An incomplete command
+
+Type `5 -` into the box and run it.
+
+```{r calc4, exercise=TRUE}
+5 -
+```
+
+R answers with a `+` prompt instead of a result. That is R saying *"I'm still
+waiting --- you haven't finished."* In your own console, press **Escape** to
+cancel and start again. This is the single most common thing that confuses
+people in their first week, and now it will not confuse you.
+
+```{r quiz-prompt}
+quiz(caption = "Quick check",
+  question("You type a command and R responds with a `+` prompt instead of an answer. What happened?",
+    answer("The command is incomplete --- R is waiting for the rest of it.", correct = TRUE),
+    answer("R is adding something."),
+    answer("An error occurred and R has crashed."),
+    answer("R is asking you to confirm the command."),
+    allow_retry = TRUE,
+    correct = "Right. Press Escape to cancel, then retype the full command.",
+    incorrect = "Not quite --- the `+` prompt means R thinks your command isn't finished yet."
+  )
+)
+```
+
+## 2. Objects
+
+You can store a result in an **object** with the arrow `<-`. R's keyboard
+shortcut for the arrow is **Alt + -** (Windows) or **Option + -** (Mac).
+
+```{r obj1, exercise=TRUE}
+a <- 1
+a
+```
+
+Notice that assigning does *not* print anything. To see an object, type its
+name.
+
+Once an object exists, you can use it anywhere you would use its value:
+
+```{r obj2, exercise=TRUE}
+a <- 1
+a + 2
+a <- 100
+a + 2
+```
+
+Your turn. Create an object called `die` that holds the numbers 1 through 6.
+The colon operator makes a sequence: `1:6`.
+
+```{r obj3, exercise=TRUE}
+
+```
+
+```{r obj3-hint}
+# use the arrow, then print the object to check
+die <- ...
+```
+
+```{r obj3-solution}
+die <- 1:6
+die
+```
+
+R is **case sensitive**: `die` and `Die` are two different objects. Names cannot
+begin with a number, and cannot contain spaces or most symbols.
+
+```{r quiz-names}
+quiz(caption = "Which of these are legal object names?",
+  question("Select every name R will accept.",
+    answer("`my_die`", correct = TRUE),
+    answer("`die2`", correct = TRUE),
+    answer("`2die`", message = "Names cannot start with a number."),
+    answer("`my die`", message = "Names cannot contain spaces."),
+    answer("`.die`", correct = TRUE),
+    allow_retry = TRUE
+  )
+)
+```
+
+## 3. Vectors do maths all at once
+
+`die` is not a single number --- it is a **vector** of six numbers. When you do
+arithmetic on a vector, R does it to *every element*.
+
+Predict what this prints before you run it:
+
+```{r vec1, exercise=TRUE}
+die <- 1:6
+die - 1
+die / 2
+die * die
+```
+
+That last one may have surprised you. `die * die` did **not** do matrix
+multiplication --- it multiplied each element by the element in the same
+position: 1\*1, 2\*2, 3\*3, and so on. This is called **element-wise** execution
+and it is everywhere in R.
+
+### Recycling
+
+What if the two vectors are different lengths? R **recycles** the shorter one
+until it is long enough.
+
+```{r vec2, exercise=TRUE}
+die <- 1:6
+die + 1:2
+```
+
+`1:2` became `1 2 1 2 1 2`. Useful, and occasionally a trap --- if the lengths
+don't divide evenly, R warns you but still returns an answer.
+
+Your turn: use `die` to produce the numbers **2, 4, 6, 8, 10, 12** without
+typing them out.
+
+```{r vec3, exercise=TRUE}
+die <- 1:6
+
+```
+
+```{r vec3-solution}
+die <- 1:6
+die * 2
+```
+
+## 4. Functions
+
+A **function** is a name followed by parentheses. Whatever you put inside the
+parentheses is what the function works on.
+
+```{r fun1, exercise=TRUE}
+die <- 1:6
+mean(die)
+sum(die)
+round(3.1415)
+factorial(3)
+```
+
+Functions can be nested --- R works from the inside out:
+
+```{r fun2, exercise=TRUE}
+round(mean(1:6))
+```
+
+### sample()
+
+The function that makes dice possible is `sample()`. It draws at random from a
+vector.
+
+```{r fun3, exercise=TRUE}
+die <- 1:6
+sample(x = die, size = 1)
+```
+
+Run it several times. You get a different number each time --- you have rolled a
+die.
+
+### Arguments
+
+`x` and `size` are the function's **arguments**. To find out what arguments a
+function takes, use `args()`:
+
+```{r fun4, exercise=TRUE}
+args(sample)
+args(round)
+```
+
+`round(x, digits = 0)` shows that `digits` has a **default value** of 0. You only
+need to supply an argument if you want something other than the default.
+
+```{r fun5, exercise=TRUE}
+round(3.1415)
+round(3.1415, digits = 2)
+```
+
+If you name your arguments, order does not matter. If you don't name them, R
+matches them by position.
+
+```{r quiz-args}
+quiz(caption = "Quick check",
+  question("`round(x, digits = 0)`. Which calls round pi to 2 decimal places?",
+    answer("`round(3.1415, 2)`", correct = TRUE),
+    answer("`round(digits = 2, x = 3.1415)`", correct = TRUE),
+    answer("`round(2, 3.1415)`", message = "This rounds the number 2 to 3 decimal places."),
+    answer("`round(3.1415, digits = 2)`", correct = TRUE),
+    allow_retry = TRUE
+  )
+)
+```
+
+## 5. Rolling two dice
+
+Now roll a **pair** of dice. Change `size` to 2:
+
+```{r roll1, exercise=TRUE}
+die <- 1:6
+sample(die, size = 2)
+```
+
+Run it a few times. Do you ever see a double --- two of the same number?
+
+You won't. By default `sample()` draws **without replacement**: once it has taken
+the 3, the 3 is gone and cannot come up again. That is not how dice work. Real
+dice sample **with replacement**.
+
+```{r roll2, exercise=TRUE}
+die <- 1:6
+sample(die, size = 2, replace = TRUE)
+```
+
+Run that several times until you see a double.
+
+Now sum the two dice to get the roll:
+
+```{r roll3, exercise=TRUE}
+die <- 1:6
+dice <- sample(die, size = 2, replace = TRUE)
+sum(dice)
+```
+
+```{r quiz-replace}
+quiz(caption = "Quick check",
+  question("Why did we need `replace = TRUE`?",
+    answer("Without it, the same number cannot be drawn twice --- so doubles would be impossible.", correct = TRUE),
+    answer("Without it, `sample()` returns an error."),
+    answer("It makes the sampling faster."),
+    answer("It replaces the object `die` with a new one.", message = "It has nothing to do with the object --- it's about whether a drawn value goes back in the bag."),
+    allow_retry = TRUE
+  )
+)
+```
+
+## 6. Write your own function
+
+Typing three lines every time you want to roll is tedious. Wrap it in a function
+of your own.
+
+The recipe is always the same:
+
+```
+name <- function(arguments) {
+  body of code
+}
+```
+
+Here it is for our dice:
+
+```{r own1, exercise=TRUE}
+roll <- function() {
+  die <- 1:6
+  dice <- sample(die, size = 2, replace = TRUE)
+  sum(dice)
+}
+
+roll()
+```
+
+Run `roll()` a few times. You have just built a tool.
+
+Two things to notice:
+
+- The function returns the **last line** of its body. That is why `sum(dice)`
+  comes last.
+- `die` and `dice` live *inside* the function. They do not appear in your
+  environment.
+
+### Give it an argument
+
+Right now `roll()` can only roll a six-sided die. Rewrite it so the die is an
+**argument** with a default of `1:6` --- then it can roll anything.
+
+```{r own2, exercise=TRUE}
+roll2 <- function(______) {
+  dice <- sample(______, size = 2, replace = TRUE)
+  sum(dice)
+}
+
+roll2()
+roll2(die = 1:20)
+```
+
+```{r own2-hint}
+# The argument goes in the parentheses, with its default after an = sign.
+roll2 <- function(die = 1:6) {
+  ...
+}
+```
+
+```{r own2-solution}
+roll2 <- function(die = 1:6) {
+  dice <- sample(die, size = 2, replace = TRUE)
+  sum(dice)
+}
+
+roll2()
+roll2(die = 1:20)
+```
+
+## 7. Roll it 10,000 times
+
+One roll tells you nothing. `replicate()` repeats an expression as many times as
+you like and collects the results.
+
+```{r rep1, exercise=TRUE}
+roll <- function() {
+  die <- 1:6
+  dice <- sample(die, size = 2, replace = TRUE)
+  sum(dice)
+}
+
+replicate(10, roll())
+```
+
+Now do it ten thousand times and look at the shape of the results:
+
+```{r rep2, exercise=TRUE, exercise.lines=12}
+roll <- function() {
+  die <- 1:6
+  dice <- sample(die, size = 2, replace = TRUE)
+  sum(dice)
+}
+
+rolls <- replicate(10000, roll())
+hist(rolls, breaks = 1.5:12.5, main = "10,000 rolls of a fair pair of dice",
+     xlab = "Sum of two dice", col = "grey80")
+```
+
+A pyramid, peaking at 7. That is what a **fair** pair of dice looks like: there
+are six ways to make a 7 and only one way to make a 12.
+
+You can also count the outcomes directly:
+
+```{r rep3, exercise=TRUE}
+roll <- function() sum(sample(1:6, size = 2, replace = TRUE))
+rolls <- replicate(10000, roll())
+table(rolls)
+```
+
+## 8. Weight the dice
+
+Time to cheat.
+
+`sample()` has one more argument we haven't used: `prob`. It takes a vector of
+probabilities, one for each value, saying how likely each is to be drawn.
+
+A **fair** die gives every side the same chance --- 1/6 each:
+
+```{r weight1, exercise=TRUE}
+sample(1:6, size = 2, replace = TRUE, prob = c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6))
+```
+
+Now load it. Make the 6 come up **half** the time, and split the rest evenly
+across 1 through 5 (1/10 each). The six numbers must add up to 1.
+
+```{r weight2, exercise=TRUE}
+roll <- function() {
+  die <- 1:6
+  dice <- sample(die, size = 2, replace = TRUE,
+                 prob = c(______))
+  sum(dice)
+}
+
+roll()
+```
+
+```{r weight2-hint}
+# Five sides at 1/10, and the six at 5/10. Check they sum to 1:
+sum(c(1/10, 1/10, 1/10, 1/10, 1/10, 5/10))
+```
+
+```{r weight2-solution}
+roll <- function() {
+  die <- 1:6
+  dice <- sample(die, size = 2, replace = TRUE,
+                 prob = c(1/10, 1/10, 1/10, 1/10, 1/10, 5/10))
+  sum(dice)
+}
+
+roll()
+```
+
+### Does it work?
+
+Ten thousand rolls of the loaded dice. Compare this histogram with the fair one
+from the last section.
+
+```{r weight3, exercise=TRUE, exercise.lines=14}
+roll <- function() {
+  die <- 1:6
+  dice <- sample(die, size = 2, replace = TRUE,
+                 prob = c(1/10, 1/10, 1/10, 1/10, 1/10, 5/10))
+  sum(dice)
+}
+
+rolls <- replicate(10000, roll())
+hist(rolls, breaks = 1.5:12.5, main = "10,000 rolls of weighted dice",
+     xlab = "Sum of two dice", col = "indianred")
+mean(rolls)
+```
+
+The peak has slid to the right and 12 is now common. The mean roll is well above
+7. If you played this at a casino table, the casino would notice.
+
+```{r quiz-weight}
+quiz(caption = "Quick check",
+  question("Your weighted die uses `prob = c(1/10, 1/10, 1/10, 1/10, 1/10, 5/10)`. Which sum is now the *most* likely?",
+    answer("12", correct = TRUE, message = "Yes --- 12 requires two sixes, and sixes are now the most common face by far."),
+    answer("7", message = "7 wins for *fair* dice. Try running the simulation and looking at `table(rolls)`."),
+    answer("2"),
+    answer("Every sum is equally likely."),
+    allow_retry = TRUE
+  )
+)
+```
+
+## 9. Your turn
+
+No hints on these. Use the console below --- everything you need is in the
+sections above.
+
+**Challenge 1.** Write `roll_n()`, a function that rolls `n` fair dice (default
+2) and returns their sum.
+
+```{r ch1, exercise=TRUE, exercise.lines=10}
+
+```
+
+```{r ch1-solution}
+roll_n <- function(n = 2) {
+  sum(sample(1:6, size = n, replace = TRUE))
+}
+roll_n()
+roll_n(5)
+```
+
+**Challenge 2.** Weight a die so that **1 never comes up at all**, and the other
+five faces are equally likely. Roll it 10,000 times and check with `table()`
+that no 1s appear.
+
+```{r ch2, exercise=TRUE, exercise.lines=10}
+
+```
+
+```{r ch2-solution}
+weird <- replicate(10000, sample(1:6, size = 1, replace = TRUE,
+                                 prob = c(0, 0.2, 0.2, 0.2, 0.2, 0.2)))
+table(weird)
+```
+
+**Challenge 3.** The weighted dice in Section 8 average about 9. Can you push
+the average roll all the way to **10**? Change the `prob` values, run 10,000
+rolls, check the `mean()`, and try again. (How high can the average possibly go?)
+
+```{r ch3, exercise=TRUE, exercise.lines=14}
+
+```
+
+## What you learned
+
+In under an hour you used:
+
+| Idea | Looks like |
+|---|---|
+| Arithmetic | `1 + 1`, `2^10`, `17 %% 5` |
+| Objects | `die <- 1:6` |
+| Vectors | `1:6`, element-wise math, recycling |
+| Functions | `sum()`, `mean()`, `round()`, `sample()` |
+| Arguments & defaults | `args(round)`, `round(x, digits = 2)` |
+| Writing functions | `roll <- function() { ... }` |
+| Repetition | `replicate(10000, roll())` |
+| Summarising | `table()`, `hist()`, `mean()` |
+
+That is the core of the language. Everything else is more functions.
+
+**Where this came from:** Garrett Grolemund, *Hands-On Programming with R*,
+Chapters 1--3 --- free at <https://rstudio-education.github.io/hopr/basics.html>

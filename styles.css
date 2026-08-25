@@ -1,0 +1,26 @@
+/* R Basics & The Weighted Dice — course tutorial styles */
+
+body { font-size: 1.02rem; }
+
+/* Give the live code editors a bit more presence */
+.exercise-cell, .cell-live {
+  margin-block: 1.4rem;
+}
+
+/* "Your turn" callouts */
+.turn {
+  border-left: 4px solid #b03a2e;
+  background: #fdf3f2;
+  padding: 0.75rem 1rem;
+  margin: 1.25rem 0;
+  border-radius: 0 4px 4px 0;
+}
+.turn strong { color: #b03a2e; }
+
+@media (prefers-color-scheme: dark) {
+  .turn { background: #2b1c1a; border-left-color: #e07a6a; }
+  .turn strong { color: #e07a6a; }
+}
+
+/* Section rules */
+h2 { border-bottom: 2px solid #dee2e6; padding-bottom: .3rem; margin-top: 2.5rem; }

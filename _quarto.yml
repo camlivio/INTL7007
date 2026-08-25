@@ -1,0 +1,22 @@
+project:
+  type: default
+  output-dir: docs
+  render:
+    - index.qmd
+  resources:
+    - dice-fallback.R
+
+format:
+  live-html:
+    toc: true
+    toc-depth: 2
+    theme: cosmo
+    css: styles.css
+    smooth-scroll: true
+    code-tools: false
+
+engine: knitr
+
+live:
+  show-hints: true
+  show-solutions: true
