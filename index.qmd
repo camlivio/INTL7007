@@ -1,6 +1,6 @@
 ---
 title: "R Basics & The Weighted Dice"
-subtitle: "Your first hour in R — everything runs in this page, nothing to install"
+subtitle: "Your first hour in R"
 engine: knitr
 format: live-html
 ---
@@ -9,7 +9,7 @@ format: live-html
 
 ## Welcome {.unnumbered}
 
-Today you are going to build a pair of dice in R --- and then quietly weight
+Today you are going to build a pair of dice in R --- and then weight
 them so they roll 12 more often than they should.
 
 Along the way you will meet almost everything you need to start using R:
