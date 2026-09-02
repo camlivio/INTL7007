@@ -96,21 +96,19 @@ head(voting)
 nrow(voting)
 ```
 
-### One new thing, free of charge
+### NEW**
 
-A **data frame** is a table. You have not been taught these yet, and you do not
-need to be. There is exactly one thing to know today:
+A **data frame** is a table. 
 
 ```{webr}
 #| startover: true
 head(voting$voted)
 ```
 
-The dollar sign pulls **one column out as a vector**. And a vector is exactly
-what you spent all of last class learning to handle. `voting$voted` is a vector
+The dollar sign pulls **one column out as a vector**. And a vector is what we spent all of last class learning to handle. `voting$voted` is a vector
 of 229,444 zeros and ones; `voting$message` is a vector of `"yes"` and `"no"`.
 
-One consequence worth pausing on. When a variable is coded 0/1, its **mean is a
+When a variable is coded 0/1 (what are these called, again?), its **mean is a
 proportion**:
 
 ```{webr}
@@ -129,7 +127,7 @@ depend on it.
 voted?*
 
 ::: {.target}
-**Target output.** Your code is right when the box prints exactly this:
+**Target output.** Your code is right when the box prints this:
 
 ```
 [1] 0.3779482
@@ -159,10 +157,10 @@ ______
 ## Hint
 
 Did your first attempt produce code referring to a column called `treatment`,
-or `turnout`, or `group`? Of course it did. **The model cannot see your
-screen.** It does not know your data exists.
+or `turnout`, or `group`? **The model cannot see your
+screen.** It does not know your data exists and its structure. 
 
-Tell it: the data frame is called `voting`, the columns are `birth`, `message`
+Articulating the structure and "columns" in your data is essential. The data frame is called `voting`, the columns are `birth`, `message`
 and `voted`, `message` is the text `"yes"` or `"no"`, and `voted` is `1` or `0`.
 
 Then ask again.
@@ -185,13 +183,10 @@ voted: **0.378**, or about 38%.
 ::: {.callout-important}
 ## The lesson of Problem 1
 
-Almost nobody gets this on the first prompt, and the reason is always the same:
-the first prompt described the *question* but not the *data*.
+The first prompt described the *question* but not the *data*.
 
 An LLM will never tell you it is guessing at your column names. It will write
-confident, well-formatted, completely inapplicable code. Supplying the shape of
-your data is not politeness --- it is the difference between an answer and a
-fabrication.
+confident, well-formatted, completely inapplicable code.
 :::
 
 ## Problem 2. Did the mailing work? {.unnumbered}
@@ -212,7 +207,7 @@ mailing, compared with those who did not?*
 :::
 
 ::: {.turn}
-**Your turn.** Same routine. But this time, before you paste anything, do one
+**Your turn.** Same idea. But this time, before you paste anything, do one
 extra thing: **say out loud how many separate steps this takes.** If your
 prompt does not mention all of them, it will not work in one go.
 :::
@@ -237,7 +232,7 @@ Three steps, not one:
 2. the turnout rate among people who did not,
 3. the difference between them.
 
-A prompt that names all three gets working code. A prompt that says "find the
+A prompt that names all three steps gets working code. A prompt that says "find the
 effect of the mailing" gets a regression, or a t-test, or a paragraph about
 causal inference --- because "effect" is your word, not an instruction.
 :::
@@ -262,13 +257,11 @@ famous for.
 write, in the comment block, what it does in plain English. Not what it is
 *for* --- what it *does*.
 
-If you cannot, you do not have it yet. Ask the model to explain that one line,
+If you cannot, ask the model to explain that one line,
 then write the explanation in your own words.
 :::
 
 ## Problem 3. Stretch {.unnumbered}
-
-[If you have time --- otherwise, take it home]{.timing}
 
 **Your question:** *Was the mailing more effective for older voters than for
 younger ones?*
@@ -301,7 +294,7 @@ ______
 
 There is no `age` column. You have `birth`, and the election was in 2006.
 
-That is the whole difficulty: the thing you want to split on **does not exist
+That is the issue: the thing you want to split on **does not exist
 in the data yet**, and the model has no way of knowing you want it built. You
 have to say so.
 :::
@@ -351,12 +344,11 @@ students who do not. Code that runs feels like progress. It isn't, on its own.
 **Keep this for the semester.**
 
 1. Say what you want before you ask.
-2. Give it your data --- names, coding, shape. It cannot see your screen.
+2. Make sure you understand the structure of the data --- names, coding, shape. 
 3. Run it.
 4. Check one number you can verify yourself.
-5. If you cannot explain a line, you do not have it yet.
+5. If you cannot explain a line, ask it for a one-line explanation. 
 :::
 
 **Next class --- Part II: Break It.** You will get R code that runs perfectly
-and gives the wrong answer, with no error message anywhere. Rule 4 is the only
-thing that saves you.
+and gives the wrong answer, with no error message. 

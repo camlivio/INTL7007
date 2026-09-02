@@ -202,9 +202,9 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsInN0YXJ0b3ZlciI6dHJ1ZX0sImNvZGUiOiJ2
 </script>
 </div>
 </div>
-<section id="one-new-thing-free-of-charge" class="level3">
-<h3 class="anchored" data-anchor-id="one-new-thing-free-of-charge">One new thing, free of charge</h3>
-<p>A <strong>data frame</strong> is a table. You have not been taught these yet, and you do not need to be. There is exactly one thing to know today:</p>
+<section id="new" class="level3">
+<h3 class="anchored" data-anchor-id="new">NEW**</h3>
+<p>A <strong>data frame</strong> is a table.</p>
 <div class="cell" data-startover="true">
 <div>
 <div id="webr-3" class="exercise-cell">
@@ -215,8 +215,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsInN0YXJ0b3ZlciI6dHJ1ZX0sImNvZGUiOiJo
 </script>
 </div>
 </div>
-<p>The dollar sign pulls <strong>one column out as a vector</strong>. And a vector is exactly what you spent all of last class learning to handle. <code>voting$voted</code> is a vector of 229,444 zeros and ones; <code>voting$message</code> is a vector of <code>"yes"</code> and <code>"no"</code>.</p>
-<p>One consequence worth pausing on. When a variable is coded 0/1, its <strong>mean is a proportion</strong>:</p>
+<p>The dollar sign pulls <strong>one column out as a vector</strong>. And a vector is what we spent all of last class learning to handle. <code>voting$voted</code> is a vector of 229,444 zeros and ones; <code>voting$message</code> is a vector of <code>"yes"</code> and <code>"no"</code>.</p>
+<p>When a variable is coded 0/1 (what are these called, again?), its <strong>mean is a proportion</strong>:</p>
 <div class="cell" data-startover="true">
 <div>
 <div id="webr-4" class="exercise-cell">
@@ -235,7 +235,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsInN0YXJ0b3ZlciI6dHJ1ZX0sImNvZGUiOiJt
 <p><span class="timing">≈ 6 minutes</span></p>
 <p><strong>Your question:</strong> <em>Among the people who received the mailing, what share voted?</em></p>
 <div class="target">
-<p><strong>Target output.</strong> Your code is right when the box prints exactly this:</p>
+<p><strong>Target output.</strong> Your code is right when the box prints this:</p>
 <pre><code>[1] 0.3779482</code></pre>
 </div>
 <div class="turn">
@@ -265,8 +265,8 @@ Hint
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>Did your first attempt produce code referring to a column called <code>treatment</code>, or <code>turnout</code>, or <code>group</code>? Of course it did. <strong>The model cannot see your screen.</strong> It does not know your data exists.</p>
-<p>Tell it: the data frame is called <code>voting</code>, the columns are <code>birth</code>, <code>message</code> and <code>voted</code>, <code>message</code> is the text <code>"yes"</code> or <code>"no"</code>, and <code>voted</code> is <code>1</code> or <code>0</code>.</p>
+<p>Did your first attempt produce code referring to a column called <code>treatment</code>, or <code>turnout</code>, or <code>group</code>? <strong>The model cannot see your screen.</strong> It does not know your data exists and its structure.</p>
+<p>Articulating the structure and “columns” in your data is essential. The data frame is called <code>voting</code>, the columns are <code>birth</code>, <code>message</code> and <code>voted</code>, <code>message</code> is the text <code>"yes"</code> or <code>"no"</code>, and <code>voted</code> is <code>1</code> or <code>0</code>.</p>
 <p>Then ask again.</p>
 </div>
 </div>
@@ -287,8 +287,8 @@ The lesson of Problem 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Almost nobody gets this on the first prompt, and the reason is always the same: the first prompt described the <em>question</em> but not the <em>data</em>.</p>
-<p>An LLM will never tell you it is guessing at your column names. It will write confident, well-formatted, completely inapplicable code. Supplying the shape of your data is not politeness — it is the difference between an answer and a fabrication.</p>
+<p>The first prompt described the <em>question</em> but not the <em>data</em>.</p>
+<p>An LLM will never tell you it is guessing at your column names. It will write confident, well-formatted, completely inapplicable code.</p>
 </div>
 </div>
 </section>
@@ -302,7 +302,7 @@ The lesson of Problem 1
 <pre><code>[1] 0.08130991</code></pre>
 </div>
 <div class="turn">
-<p><strong>Your turn.</strong> Same routine. But this time, before you paste anything, do one extra thing: <strong>say out loud how many separate steps this takes.</strong> If your prompt does not mention all of them, it will not work in one go.</p>
+<p><strong>Your turn.</strong> Same idea. But this time, before you paste anything, do one extra thing: <strong>say out loud how many separate steps this takes.</strong> If your prompt does not mention all of them, it will not work in one go.</p>
 </div>
 <div class="cell" data-startover="true" data-exercise="ex_p2">
 <div>
@@ -333,7 +333,7 @@ Hint
 <li>the turnout rate among people who did not,</li>
 <li>the difference between them.</li>
 </ol>
-<p>A prompt that names all three gets working code. A prompt that says “find the effect of the mailing” gets a regression, or a t-test, or a paragraph about causal inference — because “effect” is your word, not an instruction.</p>
+<p>A prompt that names all three steps gets working code. A prompt that says “find the effect of the mailing” gets a regression, or a t-test, or a paragraph about causal inference — because “effect” is your word, not an instruction.</p>
 </div>
 </div>
 </div>
@@ -347,12 +347,11 @@ Hint
 </div>
 <div class="turn">
 <p><strong>Before you move on.</strong> Pick any single line of the code you were given and write, in the comment block, what it does in plain English. Not what it is <em>for</em> — what it <em>does</em>.</p>
-<p>If you cannot, you do not have it yet. Ask the model to explain that one line, then write the explanation in your own words.</p>
+<p>If you cannot, ask the model to explain that one line, then write the explanation in your own words.</p>
 </div>
 </section>
 <section id="problem-3.-stretch" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="problem-3.-stretch">Problem 3. Stretch</h2>
-<p><span class="timing">If you have time — otherwise, take it home</span></p>
 <p><strong>Your question:</strong> <em>Was the mailing more effective for older voters than for younger ones?</em></p>
 <p>Split the sample at age 50 in 2006, and compute the effect from Problem 2 separately within each group.</p>
 <div class="target">
@@ -384,7 +383,7 @@ Hint
 <div id="callout-5" class="callout-5-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>There is no <code>age</code> column. You have <code>birth</code>, and the election was in 2006.</p>
-<p>That is the whole difficulty: the thing you want to split on <strong>does not exist in the data yet</strong>, and the model has no way of knowing you want it built. You have to say so.</p>
+<p>That is the issue: the thing you want to split on <strong>does not exist in the data yet</strong>, and the model has no way of knowing you want it built. You have to say so.</p>
 </div>
 </div>
 </div>
@@ -418,13 +417,13 @@ Hint
 <p><strong>Keep this for the semester.</strong></p>
 <ol type="1">
 <li>Say what you want before you ask.</li>
-<li>Give it your data — names, coding, shape. It cannot see your screen.</li>
+<li>Make sure you understand the structure of the data — names, coding, shape.</li>
 <li>Run it.</li>
 <li>Check one number you can verify yourself.</li>
-<li>If you cannot explain a line, you do not have it yet.</li>
+<li>If you cannot explain a line, ask it for a one-line explanation.</li>
 </ol>
 </div>
-<p><strong>Next class — Part II: Break It.</strong> You will get R code that runs perfectly and gives the wrong answer, with no error message anywhere. Rule 4 is the only thing that saves you.</p>
+<p><strong>Next class — Part II: Break It.</strong> You will get R code that runs perfectly and gives the wrong answer, with no error message.</p>
 <script type="webr-data">
 eyJvcHRpb25zIjp7ImJhc2VVcmwiOiJodHRwczovL3dlYnIuci13YXNtLm9yZy92MC42LjAvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsiZXZhbHVhdGUiLCJrbml0ciIsImh0bWx0b29scyJdLCJyZXBvcyI6W119LCJyZW5kZXJfZGYiOiJkZWZhdWx0In0=
 </script>
