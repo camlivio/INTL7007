@@ -90,6 +90,7 @@ voting <- read.csv("voting.csv")
 ```
 
 ```{webr}
+#| startover: true
 voting <- read.csv("voting.csv")
 head(voting)
 nrow(voting)
@@ -101,6 +102,7 @@ A **data frame** is a table. You have not been taught these yet, and you do not
 need to be. There is exactly one thing to know today:
 
 ```{webr}
+#| startover: true
 head(voting$voted)
 ```
 
@@ -112,6 +114,7 @@ One consequence worth pausing on. When a variable is coded 0/1, its **mean is a
 proportion**:
 
 ```{webr}
+#| startover: true
 mean(voting$voted)
 ```
 
@@ -142,6 +145,7 @@ it produced.
 :::
 
 ```{webr}
+#| startover: true
 #| exercise: ex_p1
 # MY PROMPT:
 # ______
@@ -214,6 +218,7 @@ prompt does not mention all of them, it will not work in one go.
 :::
 
 ```{webr}
+#| startover: true
 #| exercise: ex_p2
 # MY PROMPT:
 # ______
@@ -281,6 +286,7 @@ separately within each group.
 :::
 
 ```{webr}
+#| startover: true
 #| exercise: ex_p3
 # MY PROMPT:
 # ______
