@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Working With an LLM — Part I: Prompt It</title>
+<title>Coding With an LLM — Part I: Prompt It</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -86,6 +86,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
+  <li><a href="#large-language-models" id="toc-large-language-models" class="nav-link" data-scroll-target="#large-language-models">Large Language Models</a></li>
   <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The data</a></li>
   <li><a href="#problem-1.-who-turned-out" id="toc-problem-1.-who-turned-out" class="nav-link" data-scroll-target="#problem-1.-who-turned-out">Problem 1. Who turned out?</a></li>
   <li><a href="#problem-2.-did-the-mailing-work" id="toc-problem-2.-did-the-mailing-work" class="nav-link" data-scroll-target="#problem-2.-did-the-mailing-work">Problem 2. Did the mailing work?</a></li>
@@ -98,8 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Working With an LLM — Part I: Prompt It</h1>
-<p class="subtitle lead">Twenty minutes on the one skill that makes AI useful for code</p>
+<h1 class="title">Coding With an LLM — Part I: Prompt It</h1>
 </div>
 
 
@@ -118,20 +118,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="welcome" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="welcome">Welcome</h2>
-<p>Last class you built a pair of weighted dice. Today you are going to do something you have <strong>not</strong> been taught how to do — and you are going to do it in about fifteen minutes, using an LLM as your second pair of hands.</p>
-<p>The point of this session is not that the LLM can write R. You already suspected that. The point is that <em>how you ask</em> determines whether you get something correct or something plausible, and that telling those two apart is your job, not the model’s.</p>
+<p>Last class you built a pair of weighted dice. Today you are going to do something you have <strong>not</strong> been taught how to do — and you are going to do it in about fifteen minutes, with a colleague, using an LLM as your second pair of hands.</p>
+<p>The point of this session is not that the LLM can write code for you, but that <em>how you ask</em> determines whether you get something correct or something plausible, and that telling those two apart is your job, not the model’s.</p>
+</section>
+<section id="large-language-models" class="level2">
+<h2 class="anchored" data-anchor-id="large-language-models">Large Language Models</h2>
+<p>How LLMs work and what they can and cannot do deserve far more time than what we have in this section. In the meantime, I encourage you to familiarize yourself with some of the foundational literature on these topics. Here are two recommendations to get started:</p>
+<ul>
+<li><p>Bender, E. M., Gebru, T., McMillan-Major, A., &amp; Shmitchell, S. (2021). <a href="https://doi.org/10.1145/3442188.3445922">On the Dangers of Stochastic Parrots: Can Language Models Be Too Big? 🦜</a> <em>Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency (FAccT ’21)</em>, 610–623.</p></li>
+<li><p>Jurafsky, D., &amp; Martin, J. H. (2026). <a href="https://web.stanford.edu/~jurafsky/slp3/1.pdf">Chapter 1: Introduction</a>. In <em>Speech and Language Processing</em> (3rd ed.&nbsp;draft, August 19, 2026).</p></li>
+<li><p>Jurafsky, D., &amp; Martin, J. H. (2026). <a href="https://web.stanford.edu/~jurafsky/slp3/2.pdf">Chapter 2: Words and Tokens</a>. In <em>Speech and Language Processing</em> (3rd ed.&nbsp;draft, August 19, 2026).</p></li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-How this page works
+How this hands-on exercise works
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Keep <strong>two tabs open</strong>: this page, and whatever LLM you use (ChatGPT, Claude, Gemini — it does not matter for today).</p>
-<p>Every grey box below is a real R console running inside your browser. Paste the code the LLM gives you into the box, click <strong>Run Code</strong>, and compare what you get to the target. Nothing here can break, and nothing installs.</p>
+<p>Keep <strong>two tabs open</strong>: this page, and whatever LLM you use (ChatGPT, Claude, Gemini, etc.).</p>
+<p>Every grey box below is a real R console running inside your browser. Paste the code the LLM gives you into the box, click <strong>Run Code</strong>, and compare what you get to the target.</p>
 <p>The first box takes a few seconds to wake up while R loads and the dataset uploads. Start it now, before you read on.</p>
 </div>
 </div>
