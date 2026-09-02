@@ -24,3 +24,64 @@ body { font-size: 1.02rem; }
 
 /* Section rules */
 h2 { border-bottom: 2px solid #dee2e6; padding-bottom: .3rem; margin-top: 2.5rem; }
+
+/* ---- Part I: Prompt It ---- */
+
+/* The one rule */
+.rule {
+  border: 2px solid #1a5490;
+  background: #f2f7fb;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 5px;
+}
+.rule strong { color: #1a5490; }
+
+/* Target output boxes */
+.target {
+  border-left: 4px solid #1e7a45;
+  background: #f1f8f4;
+  padding: .75rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+}
+.target strong { color: #1e7a45; }
+.target pre {
+  background: #fff;
+  border: 1px solid #cfe3d6;
+  margin-bottom: 0;
+}
+
+/* Timing chips in the margin of a heading */
+.timing {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #6c757d;
+  border: 1px solid #ced4da;
+  border-radius: 999px;
+  padding: .1rem .6rem;
+  vertical-align: middle;
+  margin-left: .5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .rule   { background: #16232e; border-color: #4a90c2; }
+  .rule strong { color: #7ab8e0; }
+  .target { background: #16261d; border-left-color: #4caf7d; }
+  .target strong { color: #6fce9c; }
+  .target pre { background: #0f1a14; border-color: #2e4a3a; }
+}
+
+/* ---- Landing page ---- */
+.tutorial-list h3 {
+  margin-top: 1.8rem;
+  border: 0;
+  padding-bottom: 0;
+}
+.tutorial-list h3 a { text-decoration: none; }
+.tutorial-list h3 a:hover { text-decoration: underline; }
+.tutorial-list p { margin-bottom: .4rem; }
+.tutorial-list em { color: #6c757d; font-size: .92rem; }

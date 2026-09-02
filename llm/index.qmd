@@ -1,0 +1,340 @@
+---
+title: "Working With an LLM --- Part I: Prompt It"
+subtitle: "Twenty minutes on the one skill that makes AI useful for code"
+engine: knitr
+format:
+  live-html:
+    css: ../styles.css
+webr:
+  resources:
+    - voting.csv
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Welcome {.unnumbered}
+
+Last class you built a pair of weighted dice. Today you are going to do
+something you have **not** been taught how to do --- and you are going to do it
+in about fifteen minutes, using an LLM as your second pair of hands.
+
+The point of this session is not that the LLM can write R. You already
+suspected that. The point is that *how you ask* determines whether you get
+something correct or something plausible, and that telling those two apart is
+your job, not the model's.
+
+::: {.callout-note}
+## How this page works
+
+Keep **two tabs open**: this page, and whatever LLM you use (ChatGPT, Claude,
+Gemini --- it does not matter for today).
+
+Every grey box below is a real R console running inside your browser. Paste the
+code the LLM gives you into the box, click **Run Code**, and compare what you
+get to the target. Nothing here can break, and nothing installs.
+
+The first box takes a few seconds to wake up while R loads and the dataset
+uploads. Start it now, before you read on.
+:::
+
+::: {.rule}
+**The one rule for today.**
+
+You must be able to say **what the code should do** before you ask, and check
+**that it did that** after.
+
+Everything below is built to make you do both. If you get the right number
+without being able to say why it is right, you have not finished the problem.
+:::
+
+## The data {.unnumbered}
+
+`voting.csv` comes from a real experiment --- Gerber, Green and Larimer (2008).
+Before the 2006 Michigan primary, researchers mailed some registered voters a
+letter showing **whether their neighbours had voted** in past elections. Then
+they recorded who actually turned out.
+
+It has 229,444 rows and three columns:
+
+| Column | What it is |
+|---|---|
+| `birth` | Year of birth |
+| `message` | `"yes"` if the household got the social-pressure mailing, `"no"` if not |
+| `voted` | `1` if the person voted in 2006, `0` if not |
+
+Run this box now. It loads the data and shows you the first few rows.
+
+```{webr}
+#| setup: true
+#| exercise:
+#|   - ex_p1
+#|   - ex_p2
+#|   - ex_p3
+voting <- read.csv("voting.csv")
+```
+
+```{webr}
+voting <- read.csv("voting.csv")
+head(voting)
+nrow(voting)
+```
+
+### One new thing, free of charge
+
+A **data frame** is a table. You have not been taught these yet, and you do not
+need to be. There is exactly one thing to know today:
+
+```{webr}
+head(voting$voted)
+```
+
+The dollar sign pulls **one column out as a vector**. And a vector is exactly
+what you spent all of last class learning to handle. `voting$voted` is a vector
+of 229,444 zeros and ones; `voting$message` is a vector of `"yes"` and `"no"`.
+
+One consequence worth pausing on. When a variable is coded 0/1, its **mean is a
+proportion**:
+
+```{webr}
+mean(voting$voted)
+```
+
+31% of everyone in the study voted. Hold onto that trick --- both problems below
+depend on it.
+
+## Problem 1. Who turned out? {.unnumbered}
+
+[≈ 6 minutes]{.timing}
+
+**Your question:** *Among the people who received the mailing, what share
+voted?*
+
+::: {.target}
+**Target output.** Your code is right when the box prints exactly this:
+
+```
+[1] 0.3779482
+```
+:::
+
+::: {.turn}
+**Your turn.** Go to your LLM tab and ask for R code that answers the question.
+Paste what it gives you into the box below and run it.
+
+Write your prompt into the comment block first, so you can see it next to what
+it produced.
+:::
+
+```{webr}
+#| exercise: ex_p1
+# MY PROMPT:
+# ______
+#
+# THE CODE IT GAVE ME:
+______
+```
+
+::::: {.hint exercise="ex_p1"}
+::: {.callout-tip collapse="false"}
+## Hint
+
+Did your first attempt produce code referring to a column called `treatment`,
+or `turnout`, or `group`? Of course it did. **The model cannot see your
+screen.** It does not know your data exists.
+
+Tell it: the data frame is called `voting`, the columns are `birth`, `message`
+and `voted`, `message` is the text `"yes"` or `"no"`, and `voted` is `1` or `0`.
+
+Then ask again.
+:::
+:::::
+
+::: {.solution exercise="ex_p1"}
+**Solution:**
+
+```r
+mean(voting$voted[voting$message == "yes"])
+```
+
+Read it from the inside out. `voting$message == "yes"` produces a vector of
+`TRUE`/`FALSE`, one per person. Putting that inside `[ ]` keeps only the rows
+where it is `TRUE`. Then `mean()` of a 0/1 vector gives the proportion who
+voted: **0.378**, or about 38%.
+:::
+
+::: {.callout-important}
+## The lesson of Problem 1
+
+Almost nobody gets this on the first prompt, and the reason is always the same:
+the first prompt described the *question* but not the *data*.
+
+An LLM will never tell you it is guessing at your column names. It will write
+confident, well-formatted, completely inapplicable code. Supplying the shape of
+your data is not politeness --- it is the difference between an answer and a
+fabrication.
+:::
+
+## Problem 2. Did the mailing work? {.unnumbered}
+
+[≈ 7 minutes]{.timing}
+
+This is the actual finding of the paper.
+
+**Your question:** *How much higher was turnout among people who got the
+mailing, compared with those who did not?*
+
+::: {.target}
+**Target output.** One number:
+
+```
+[1] 0.08130991
+```
+:::
+
+::: {.turn}
+**Your turn.** Same routine. But this time, before you paste anything, do one
+extra thing: **say out loud how many separate steps this takes.** If your
+prompt does not mention all of them, it will not work in one go.
+:::
+
+```{webr}
+#| exercise: ex_p2
+# MY PROMPT:
+# ______
+#
+# THE CODE IT GAVE ME:
+______
+```
+
+::::: {.hint exercise="ex_p2"}
+::: {.callout-tip collapse="false"}
+## Hint
+
+Three steps, not one:
+
+1. the turnout rate among people who got the mailing (you already have this),
+2. the turnout rate among people who did not,
+3. the difference between them.
+
+A prompt that names all three gets working code. A prompt that says "find the
+effect of the mailing" gets a regression, or a t-test, or a paragraph about
+causal inference --- because "effect" is your word, not an instruction.
+:::
+:::::
+
+::: {.solution exercise="ex_p2"}
+**Solution:**
+
+```r
+treated <- mean(voting$voted[voting$message == "yes"])
+control <- mean(voting$voted[voting$message == "no"])
+treated - control
+```
+
+**0.081** --- an 8.1 percentage point increase in turnout. That is a very large
+effect for a get-out-the-vote intervention, and it is the result the paper is
+famous for.
+:::
+
+::: {.turn}
+**Before you move on.** Pick any single line of the code you were given and
+write, in the comment block, what it does in plain English. Not what it is
+*for* --- what it *does*.
+
+If you cannot, you do not have it yet. Ask the model to explain that one line,
+then write the explanation in your own words.
+:::
+
+## Problem 3. Stretch {.unnumbered}
+
+[If you have time --- otherwise, take it home]{.timing}
+
+**Your question:** *Was the mailing more effective for older voters than for
+younger ones?*
+
+Split the sample at age 50 in 2006, and compute the effect from Problem 2
+separately within each group.
+
+::: {.target}
+**Target output.** Two numbers --- age 50 and over first, then under 50:
+
+```
+[1] 0.08827899
+[1] 0.07448951
+```
+:::
+
+```{webr}
+#| exercise: ex_p3
+# MY PROMPT:
+# ______
+#
+# THE CODE IT GAVE ME:
+______
+```
+
+::::: {.hint exercise="ex_p3"}
+::: {.callout-tip collapse="false"}
+## Hint
+
+There is no `age` column. You have `birth`, and the election was in 2006.
+
+That is the whole difficulty: the thing you want to split on **does not exist
+in the data yet**, and the model has no way of knowing you want it built. You
+have to say so.
+:::
+:::::
+
+::: {.solution exercise="ex_p3"}
+**Solution:**
+
+```r
+age <- 2006 - voting$birth
+old <- age >= 50
+
+mean(voting$voted[old & voting$message == "yes"]) -
+  mean(voting$voted[old & voting$message == "no"])
+
+mean(voting$voted[!old & voting$message == "yes"]) -
+  mean(voting$voted[!old & voting$message == "no"])
+```
+
+**8.8 points** for the over-50s against **7.4** for the under-50s. A real
+difference, though a modest one next to the headline effect --- and now you have
+a substantive question to argue about rather than a coding one.
+:::
+
+## What you just did {.unnumbered}
+
+You loaded a 229,444-row dataset, subset it on a condition, computed group
+means, and estimated a treatment effect --- in your third class, having been
+taught none of it.
+
+That is the honest case for these tools, and it is a strong one.
+
+But notice **which parts the model could not do for you**:
+
+- It did not know your data existed. You supplied that.
+- It did not know "effect" meant a difference in means. You decided that.
+- It did not know there was no age column. You noticed that.
+- It could not tell you whether `0.378` was a sensible number. You checked that.
+
+Every one of those is a judgement about *your* problem, and none of them get
+easier by asking harder. This is why the research on novice programmers and AI
+([Prather et al. 2024](https://arxiv.org/abs/2405.17739)) finds the tools help
+students who already know what they are trying to do, and actively mislead the
+students who do not. Code that runs feels like progress. It isn't, on its own.
+
+::: {.rule}
+**Keep this for the semester.**
+
+1. Say what you want before you ask.
+2. Give it your data --- names, coding, shape. It cannot see your screen.
+3. Run it.
+4. Check one number you can verify yourself.
+5. If you cannot explain a line, you do not have it yet.
+:::
+
+**Next class --- Part II: Break It.** You will get R code that runs perfectly
+and gives the wrong answer, with no error message anywhere. Rule 4 is the only
+thing that saves you.

@@ -3,15 +3,19 @@ project:
   output-dir: docs
   render:
     - index.qmd
+    - dice/index.qmd
+    - llm/index.qmd
   resources:
-    - dice-fallback.R
+    - styles.css
+    - llm/voting.csv
+    - dice/dice-fallback.R
+    - llm/llm-fallback.R
 
 format:
   live-html:
     toc: true
     toc-depth: 2
     theme: cosmo
-    css: styles.css
     smooth-scroll: true
     code-tools: false
 
