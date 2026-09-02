@@ -1,6 +1,5 @@
 ---
-title: "Working With an LLM --- Part I: Prompt It"
-subtitle: "Twenty minutes on the one skill that makes AI useful for code"
+title: "Coding With an LLM --- Part I: Prompt It"
 engine: knitr
 format:
   live-html:
@@ -16,22 +15,39 @@ webr:
 
 Last class you built a pair of weighted dice. Today you are going to do
 something you have **not** been taught how to do --- and you are going to do it
-in about fifteen minutes, using an LLM as your second pair of hands.
+in about fifteen minutes, with a colleague, using an LLM as your second pair of hands.
 
-The point of this session is not that the LLM can write R. You already
-suspected that. The point is that *how you ask* determines whether you get
+The point of this session is not that the LLM can write code for you, but that *how you ask* determines whether you get
 something correct or something plausible, and that telling those two apart is
 your job, not the model's.
 
+## Large Language Models 
+
+How LLMs work and what they can and cannot do deserve far more time than what we have in this section. In the meantime, I encourage you to familiarize yourself with some of the foundational literature on these topics. Here are two recommendations to get started:
+
+- Bender, E. M., Gebru, T., McMillan-Major, A., & Shmitchell, S. (2021).
+  [On the Dangers of Stochastic Parrots: Can Language Models Be Too Big? 🦜](https://doi.org/10.1145/3442188.3445922)
+  *Proceedings of the 2021 ACM Conference on Fairness, Accountability, and
+  Transparency (FAccT '21)*, 610–623.
+
+- Jurafsky, D., & Martin, J. H. (2026).
+  [Chapter 1: Introduction](https://web.stanford.edu/~jurafsky/slp3/1.pdf).
+  In *Speech and Language Processing* (3rd ed. draft, August 19, 2026).
+
+- Jurafsky, D., & Martin, J. H. (2026).
+  [Chapter 2: Words and Tokens](https://web.stanford.edu/~jurafsky/slp3/2.pdf).
+  In *Speech and Language Processing* (3rd ed. draft, August 19, 2026).
+
+
 ::: {.callout-note}
-## How this page works
+## How this hands-on exercise works
 
 Keep **two tabs open**: this page, and whatever LLM you use (ChatGPT, Claude,
-Gemini --- it does not matter for today).
+Gemini, etc.).
 
 Every grey box below is a real R console running inside your browser. Paste the
 code the LLM gives you into the box, click **Run Code**, and compare what you
-get to the target. Nothing here can break, and nothing installs.
+get to the target. 
 
 The first box takes a few seconds to wake up while R loads and the dataset
 uploads. Start it now, before you read on.
