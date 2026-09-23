@@ -34,6 +34,14 @@ answer or a fabrication.
 
 *Uses Gerber, Green & Larimer (2008) on social pressure and voter turnout.*
 
+### [Week 6 --- Warming up: Quarto](quarto/)
+
+A quick check on last week's pair-programming task. Take apart a `.qmd` file,
+fix a broken header, find the one code chunk that actually runs, and predict
+what the rendered page will look like.
+
+*Reviews Pair Programming 2: Quarto in R.*
+
 :::
 
 ---

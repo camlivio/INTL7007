@@ -5,6 +5,7 @@ project:
     - index.qmd
     - dice/index.qmd
     - llm/index.qmd
+    - quarto/index.qmd
   resources:
     - styles.css
     - llm/voting.csv

@@ -1,0 +1,277 @@
+---
+title: "Warming up --- Quarto"
+subtitle: "A quick check on Pair Programming 2"
+engine: knitr
+format:
+  live-html:
+    css: ../styles.css
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+## Welcome {.unnumbered}
+
+This past week, you worked on your first Quarto document. You created the file,
+put your name in the header, added a code chunk and rendered it to HTML. 
+
+This warm-up four short parts. At each one, **commit to an answer before you open
+the reveal**. Say it out loud to your neighbour before you open the reveal. 
+
+
+## Stop 1. Anatomy of a `.qmd` file {.unnumbered}
+
+[≈ 2 minutes]{.timing}
+
+Here is a complete Quarto document, like the one you made last week:
+
+````markdown
+---
+title: "My First Quarto Document"
+author: "Ana Smith"
+format: html
+---
+
+## Running Code
+
+When you click the **Render** button, a document will be generated.
+
+```{{r}}
+1 + 1
+```
+````
+
+::: {.turn}
+**Your turn.** This file has **three** kinds of content. Name each one and say
+where it starts and ends. Then answer: which part is the *only* one R runs?
+:::
+
+::: {.callout-tip collapse="true"}
+## Reveal
+
+1. **The YAML header**, between the two `---` lines. It holds settings for the
+   whole document: title, author and output format. Quarto reads it; R never
+   does.
+2. **Markdown text**: everything outside the header and the chunks. `##` makes
+   a section heading and `**Render**` makes bold text. It's written for
+   humans.
+3. **A code chunk**, from the ` ```{r} ` line to the closing ` ``` `. **This is
+   the only part R runs.** When you render, R runs the code and pastes the
+   output into the document right below it.
+:::
+
+## Stop 2. Fix the header {.unnumbered}
+
+[≈ 2 minutes]{.timing}
+
+A pair wrote this header, clicked **Render**, and got an error instead of a
+document:
+
+````markdown
+---
+title: Pair Programming 2: Quarto in R
+author Ana Smith
+format: html
+
+## Adding a Code Chunk
+````
+
+::: {.turn}
+**Your turn.** There are **three** mistakes. Find all three before you open
+the reveal.
+:::
+
+::: {.callout-tip collapse="true"}
+## Reveal
+
+1. **The title has a colon in it and no quotes.** In YAML, a colon means
+   "key: value", so a second colon confuses it. When a value contains a colon,
+   put it in quotes.
+2. **`author` is missing its colon.** Every line in the header is `key: value`.
+3. **The header is never closed.** Without the second `---`, Quarto can't tell
+   where the settings end and the document begins.
+
+The fixed version:
+
+````markdown
+---
+title: "Pair Programming 2: Quarto in R"
+author: "Ana Smith"
+format: html
+---
+
+## Adding a Code Chunk
+````
+
+**Good habit:** always put quotes around the title and author. They cost you
+nothing and prevent the first mistake.
+:::
+
+## Stop 3. The code chunk {.unnumbered}
+
+[≈ 3 minutes]{.timing}
+
+Four students each tried to add a chunk that prints `"Hello, Quarto!"`:
+
+::: {.chunk-grid}
+
+**A**
+
+````markdown
+```{{r}}
+print("Hello, Quarto!")
+```
+````
+
+**B**
+
+````markdown
+```r
+print("Hello, Quarto!")
+```
+````
+
+**C**
+
+````markdown
+'''{r}
+print("Hello, Quarto!")
+'''
+````
+
+**D**
+
+````markdown
+```{{r}}
+print("Hello, Quarto!")
+````
+
+:::
+
+::: {.turn}
+**Your turn.** Only one of these works. Which one? For each of the other three,
+say what goes wrong.
+:::
+
+::: {.callout-tip collapse="true"}
+## Reveal
+
+- **A works.** It has three backticks, `{r}` in curly braces, and three
+  backticks to close it.
+- **B has no curly braces.** Quarto shows the code as grey text but never runs
+  it, so no `[1] "Hello, Quarto!"` appears below it. The `{ }` tells Quarto to
+  run the code.
+- **C uses apostrophes (`'''`), not backticks (` ``` `).** Quarto doesn't treat
+  it as a chunk at all, so the three lines appear as ordinary text. The
+  backtick key is at the top left of most keyboards, next to **1**.
+- **D is never closed.** Quarto treats everything after it, to the end of the
+  document, as part of the chunk. That usually causes an error, or swallows the
+  rest of the document.
+
+**Tip:** the green **+C** button in RStudio (or **Cmd+Option+I** on Mac,
+**Ctrl+Alt+I** on Windows) inserts a correct chunk, so you never have to type
+the fences.
+:::
+
+The grey box below is like the *inside* of a chunk. Whatever you type here is
+exactly what you would put between ` ```{r} ` and ` ``` `.
+
+::: {.turn}
+**Your turn.** Make R print a greeting with **your own name** in it, e.g.
+`"Hello, Ana!"`. Use `paste()` so that your name is stored in an object first.
+:::
+
+```{webr}
+#| exercise: ex_hello
+my_name <- "______"
+______
+```
+
+::::: {.hint exercise="ex_hello"}
+::: {.callout-tip collapse="false"}
+## Hint
+
+`paste()` glues pieces of text together, adding a space between them by
+default. `paste0()` adds no space.
+
+```r
+paste("Hello,", "Quarto!")
+```
+:::
+:::::
+
+::: {.solution exercise="ex_hello"}
+**Solution:**
+
+```r
+my_name <- "Ana"
+paste0("Hello, ", my_name, "!")
+```
+
+Put these two lines inside a ` ```{r} ` chunk, render, and the rendered page
+shows the code followed by `[1] "Hello, Ana!"`.
+:::
+
+## Stop 4. Predict the render {.unnumbered}
+
+[≈ 2 minutes]{.timing}
+
+::: {.turn}
+**Your turn.** Imagine you click **Render** on the document from Stop 1. What
+will the finished HTML page show, from top to bottom? Sketch it or describe it
+before you open the reveal. In particular:
+
+- Do the `---` lines appear on the page?
+- Does the `##` appear?
+- Does the page show `1 + 1`, `2`, or both?
+:::
+
+::: {.callout-tip collapse="true"}
+## Reveal
+
+Roughly this:
+
+::: {.rendered}
+<p class="r-title">My First Quarto Document</p>
+<p class="r-meta">AUTHOR<br>Ana Smith</p>
+<p class="r-h2">Running Code</p>
+<p>When you click the <strong>Render</strong> button, a document will be generated.</p>
+<pre class="r-code">1 + 1</pre>
+<pre class="r-out">[1] 2</pre>
+:::
+
+- **The header disappears.** Its settings turn into the big title and the
+  author line.
+- **`##` disappears.** It becomes a section heading, and `**Render**` becomes
+  **bold**.
+- **You see both the code and its result.** By default Quarto shows the code
+  *and* its output. The `[1]` just means "first element".
+:::
+
+## Last check {.unnumbered}
+
+Answer these from memory, then open the reveal.
+
+1. What's the keyboard shortcut for **Render**?
+2. After rendering `analysis.qmd`, what new file appears, and where?
+3. You fixed a typo but the rendered page still shows it. What's the most
+   likely reason?
+
+::: {.callout-tip collapse="true"}
+## Reveal
+
+1. **Cmd+Shift+K** on Mac, **Ctrl+Shift+K** on Windows.
+2. **`analysis.html`**, in the **same folder** as `analysis.qmd`. That HTML
+   file is the one you share or submit. The `.qmd` is your source.
+3. **You didn't re-render.** The HTML is a snapshot of the last render, and
+   editing the `.qmd` doesn't change it until you click **Render** again.
+   (RStudio saves the file when you render, but it's a good habit to save
+   first anyway.)
+:::
+
+---
+
+::: {.callout-note appearance="simple"}
+**Why this matters:** your final project is a Quarto document, and the rubric
+checks that it *renders cleanly*. Every mistake on this page is one you can now
+spot in seconds.
+:::

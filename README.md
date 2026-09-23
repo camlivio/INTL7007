@@ -13,6 +13,7 @@ runs in the student's browser via [Quarto Live](https://r-wasm.github.io/quarto-
 | `index.qmd` | `/` | Landing page listing the tutorials |
 | `dice/index.qmd` | `/dice/` | Week 2 — R Basics & The Weighted Dice |
 | `llm/index.qmd` | `/llm/` | Week 3 — Working With an LLM, Part I: Prompt It |
+| `quarto/index.qmd` | `/quarto/` | Week 6 — Warming up: Quarto (review of Pair Programming 2) |
 
 Supporting files: `styles.css` (shared by all pages), `_extensions/` (Quarto
 Live — **must be committed**), `llm/voting.csv` (Gerber, Green & Larimer 2008;
