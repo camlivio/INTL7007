@@ -68,6 +68,14 @@ By the end of section 3 you will have rebuilt this plot.
 
 ![](goal.png){fig-alt="Scatterplot of body mass against flipper length, points colored and shaped by species, with one linear trend line."}
 
+**How to read it**
+
+- Each point is one penguin: flipper length across, body mass up.
+- Color and shape show species.
+- The blue line is the overall trend; the grey band is its uncertainty.
+- Points rise left to right: longer flippers, heavier penguins. Gentoo are the
+  largest (top right).
+
 ## 3. Build a plot, layer by layer
 
 Every ggplot has three parts:
