@@ -1,6 +1,6 @@
 ---
-title: "How ggplot2 Works"
-subtitle: "A pair activity --- everything runs in this page, nothing to install"
+title: "ggplot2"
+subtitle: "Pair-programming activity"
 engine: knitr
 format:
   live-html:
