@@ -53,6 +53,8 @@ ______(penguins)
 ```
 
 ::: {.solution exercise="ex_dim"}
+**Solution:**
+
 ```r
 dim(penguins)
 ```
@@ -105,6 +107,13 @@ ggplot(
 mentions 2 rows --- why?
 :::
 
+::: {.callout-tip collapse="true"}
+## Solution
+Heavier penguins have longer flippers: a strong positive relationship. Two
+penguins have no flipper length or body mass recorded (`NA`), so they cannot be
+plotted.
+:::
+
 **Step 4 --- color.** Map a third variable.
 
 ```{webr}
@@ -130,6 +139,12 @@ ggplot(
 
 ::: {.turn}
 **Talk it over.** Why three lines? The goal has one.
+:::
+
+::: {.callout-tip collapse="true"}
+## Solution
+`color = species` sits in `ggplot()`, so it applies to every layer, and
+`geom_smooth()` fits one line per species.
 :::
 
 Mappings in `ggplot()` apply to **every** layer. Mappings inside a geom apply
@@ -171,6 +186,8 @@ ggplot(
 ```
 
 ::: {.solution exercise="ex_goal"}
+**Solution:**
+
 ```r
 library(ggthemes)
 ggplot(
@@ -201,6 +218,8 @@ ggplot(penguins, aes(x = ______, y = ______)) +
 ```
 
 ::: {.solution exercise="ex_bill"}
+**Solution:**
+
 ```r
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm)) +
   geom_point()
@@ -227,6 +246,8 @@ What should go on the x and y axes?
 :::::
 
 ::: {.solution exercise="ex_error"}
+**Solution:**
+
 `geom_point()` needs `x` and `y`. Add a mapping:
 
 ```r
@@ -251,6 +272,8 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g,
 ```
 
 ::: {.solution exercise="ex_predict"}
+**Solution:**
+
 Points colored by island, one smooth **curve** per island (`color` is global),
 no grey confidence band (`se = FALSE`).
 :::
@@ -310,6 +333,8 @@ ggplot(penguins, aes(______ = species)) +
 ```
 
 ::: {.solution exercise="ex_bar_y"}
+**Solution:**
+
 ```r
 ggplot(penguins, aes(y = species)) +
   geom_bar()
@@ -332,6 +357,8 @@ ggplot(penguins, aes(x = species)) +
 ```
 
 ::: {.solution exercise="ex_color_fill"}
+**Solution:**
+
 `color` paints the outline; `fill` paints the inside. For bars, use `fill`.
 
 Note: `"red"` sits **outside** `aes()` --- it is a fixed value, not a mapping
@@ -350,6 +377,8 @@ ggplot(diamonds, aes(x = carat)) +
 ```
 
 ::: {.solution exercise="ex_carat"}
+**Solution:**
+
 ```r
 ggplot(diamonds, aes(x = carat)) +
   geom_histogram(binwidth = 0.01)
@@ -407,6 +436,8 @@ ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
 ```
 
 ::: {.solution exercise="ex_bill_species"}
+**Solution:**
+
 ```r
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
                      color = species)) +
@@ -438,6 +469,8 @@ Both mapped aesthetics need the **same** title.
 :::::
 
 ::: {.solution exercise="ex_legend"}
+**Solution:**
+
 ```r
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm,
                      color = species, shape = species)) +
@@ -460,6 +493,8 @@ ggplot(penguins, aes(x = species, fill = island)) +
 ```
 
 ::: {.solution exercise="ex_stack"}
+**Solution:**
+
 1. *Which species live on each island?* (Torgersen: only Adelie.)
 2. *Which islands does each species live on?* (Adelie: all three.)
 :::
@@ -479,6 +514,8 @@ ggplot(mpg, aes(x = displ, y = hwy, ______ = cyl)) +
 ```
 
 ::: {.solution exercise="ex_mpg"}
+**Solution:**
+
 ```r
 ggplot(mpg, aes(x = displ, y = hwy, color = cyl)) +
   geom_point()
@@ -501,6 +538,8 @@ ggplot(penguins, aes(x = body_mass_g))
 ```
 
 ::: {.solution exercise="ex_bug1"}
+**Solution:**
+
 The `+` must end a line, not start one.
 
 ```r
@@ -516,6 +555,8 @@ ggplot(penguins, aes(x = species, y = body_mass_g)) |>
 ```
 
 ::: {.solution exercise="ex_bug2"}
+**Solution:**
+
 ggplot2 layers join with `+`, not the pipe `|>`.
 
 ```r
@@ -531,6 +572,8 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
 ```
 
 ::: {.solution exercise="ex_bug3"}
+**Solution:**
+
 Inside `aes()`, `"blue"` is treated as data (a column whose value is the word
 "blue"), so the points are red with a "blue" legend. Move it outside:
 

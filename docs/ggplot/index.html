@@ -187,6 +187,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfZGltIn0sImNvZGUi
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_dim">
+<p><strong>Solution:</strong></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>344 rows (penguins), 8 columns (variables).</p>
 </div>
@@ -237,6 +238,22 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZ2dwbG90KFxuICBkYXRhID0g
 <div class="turn">
 <p><strong>Talk it over.</strong> Describe the relationship in one sentence. The warning mentions 2 rows — why?</p>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Heavier penguins have longer flippers: a strong positive relationship. Two penguins have no flipper length or body mass recorded (<code>NA</code>), so they cannot be plotted.</p>
+</div>
+</div>
+</div>
 <p><strong>Step 4 — color.</strong> Map a third variable.</p>
 <div class="cell">
 <div>
@@ -261,6 +278,22 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZ2dwbG90KFxuICBkYXRhID0g
 </div>
 <div class="turn">
 <p><strong>Talk it over.</strong> Why three lines? The goal has one.</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>color = species</code> sits in <code>ggplot()</code>, so it applies to every layer, and <code>geom_smooth()</code> fits one line per species.</p>
+</div>
+</div>
 </div>
 <p>Mappings in <code>ggplot()</code> apply to <strong>every</strong> layer. Mappings inside a geom apply to <strong>that layer only</strong>.</p>
 <div class="cell">
@@ -288,6 +321,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfZ29hbCJ9LCJjb2Rl
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_goal">
+<p><strong>Solution:</strong></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> penguins,</span>
@@ -317,6 +351,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfYmlsbCJ9LCJjb2Rl
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_bill">
+<p><strong>Solution:</strong></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Overall, a weak negative trend — until you color by species (section 5).</p>
@@ -336,7 +371,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfZXJyb3IifSwiY29k
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_error">
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -345,7 +380,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>What should go on the x and y axes?</p>
 </div>
@@ -353,6 +388,7 @@ Hint
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_error">
+<p><strong>Solution:</strong></p>
 <p><code>geom_point()</code> needs <code>x</code> and <code>y</code>. Add a mapping:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> penguins,</span>
@@ -374,6 +410,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfcHJlZGljdCJ9LCJj
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_predict">
+<p><strong>Solution:</strong></p>
 <p>Points colored by island, one smooth <strong>curve</strong> per island (<code>color</code> is global), no grey confidence band (<code>se = FALSE</code>).</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -453,6 +490,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfYmFyX3kifSwiY29k
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_bar_y">
+<p><strong>Solution:</strong></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">y =</span> species)) <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Horizontal bars. Handy when labels are long.</p>
@@ -471,6 +509,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfY29sb3JfZmlsbCJ9
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_color_fill">
+<p><strong>Solution:</strong></p>
 <p><code>color</code> paints the outline; <code>fill</code> paints the inside. For bars, use <code>fill</code>.</p>
 <p>Note: <code>"red"</code> sits <strong>outside</strong> <code>aes()</code> — it is a fixed value, not a mapping to a column.</p>
 </div>
@@ -488,6 +527,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfY2FyYXQifSwiY29k
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_carat">
+<p><strong>Solution:</strong></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>At 0.01 you see spikes at round sizes (0.3, 0.5, 1, 1.5, 2 carats). Too wide a bin hides them.</p>
@@ -554,6 +594,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfYmlsbF9zcGVjaWVz
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_bill_species">
+<p><strong>Solution:</strong></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm,</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> species)) <span class="sc">+</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -575,7 +616,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfbGVnZW5kIn0sImNv
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_legend">
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -584,7 +625,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Both mapped aesthetics need the <strong>same</strong> title.</p>
 </div>
@@ -592,6 +633,7 @@ Hint
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_legend">
+<p><strong>Solution:</strong></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm,</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> species, <span class="at">shape =</span> species)) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -611,6 +653,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfc3RhY2sifSwiY29k
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_stack">
+<p><strong>Solution:</strong></p>
 <ol type="1">
 <li><em>Which species live on each island?</em> (Torgersen: only Adelie.)</li>
 <li><em>Which islands does each species live on?</em> (Adelie: all three.)</li>
@@ -631,6 +674,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfbXBnIn0sImNvZGUi
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_mpg">
+<p><strong>Solution:</strong></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> cyl)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>cyl</code> is numerical, so color becomes a gradient and size a scale. Now try <code>shape = cyl</code> — it fails: shapes only work for categories.</p>
@@ -651,6 +695,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfYnVnMSJ9LCJjb2Rl
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_bug1">
+<p><strong>Solution:</strong></p>
 <p>The <code>+</code> must end a line, not start one.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -666,6 +711,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfYnVnMiJ9LCJjb2Rl
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_bug2">
+<p><strong>Solution:</strong></p>
 <p>ggplot2 layers join with <code>+</code>, not the pipe <code>|&gt;</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g)) <span class="sc">+</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -681,6 +727,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfYnVnMyJ9LCJjb2Rl
 </div>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_bug3">
+<p><strong>Solution:</strong></p>
 <p>Inside <code>aes()</code>, <code>"blue"</code> is treated as data (a column whose value is the word “blue”), so the points are red with a “blue” legend. Move it outside:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g)) <span class="sc">+</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
