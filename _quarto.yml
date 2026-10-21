@@ -6,6 +6,7 @@ project:
     - dice/index.qmd
     - llm/index.qmd
     - quarto/index.qmd
+    - ggplot/index.qmd
   resources:
     - styles.css
     - llm/voting.csv

@@ -115,3 +115,33 @@ h2 { border-bottom: 2px solid #dee2e6; padding-bottom: .3rem; margin-top: 2.5rem
 .rendered pre      { margin: .4rem 0; padding: .5rem .75rem; border-radius: 4px; }
 .rendered .r-code  { background: #f1f3f5; }
 .rendered .r-out   { background: #fff; border: 1px solid #e9ecef; }
+
+/* ---- ggplot2 pair activity ---- */
+
+/* Driver/navigator instructions */
+.pair {
+  border: 2px solid #1a5490;
+  background: #f2f7fb;
+  padding: .75rem 1rem;
+  margin: 1.25rem 0;
+  border-radius: 5px;
+}
+
+/* "Swap" marker: hand the keyboard to your partner */
+.swap-chip {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #1a5490;
+  border-radius: 999px;
+  padding: .15rem .7rem;
+}
+.swap-chip::before { content: "⇄ "; }
+
+@media (prefers-color-scheme: dark) {
+  .pair { background: #16232e; border-color: #4a90c2; }
+  .swap-chip { background: #4a90c2; color: #0f1a24; }
+}

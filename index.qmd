@@ -42,6 +42,13 @@ what the rendered page will look like.
 
 *Reviews Pair Programming 2: Quarto in R.*
 
+### [Week 10 --- How ggplot2 Works](ggplot/)
+
+A pair activity. Build a plot layer by layer, then chart distributions and
+relationships, and fix three common bugs.
+
+*Based on Wickham, Çetinkaya-Rundel & Grolemund,* R for Data Science *(2e), ch. 1.*
+
 :::
 
 ---
